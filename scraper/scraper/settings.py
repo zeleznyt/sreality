@@ -7,6 +7,8 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import os
+
 BOT_NAME = 'scraper'
 
 SPIDER_MODULES = ['scraper.spiders']
@@ -22,6 +24,17 @@ DOWNLOAD_HANDLERS = {
 }
 
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+
+# Database
+DATABASE = {
+    "drivername": "postgresql",
+    "host": os.environ["POSTGRES_HOST"],
+    "port": os.environ["POSTGRES_PORT"],
+    "username": os.environ["POSTGRES_USER"],
+    "password": os.environ["POSTGRES_PASS"],
+    "database": os.environ["POSTGRES_DB"],
+}
+LOG_LEVEL = "INFO"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scraper (+http://www.yourdomain.com)'
@@ -72,9 +85,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'scraper.pipelines.ScraperPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'scraper.pipelines.ScraperPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

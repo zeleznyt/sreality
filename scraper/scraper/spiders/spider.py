@@ -29,9 +29,10 @@ class SpiderSpider(scrapy.Spider):
             price = flat.css('span.norm-price.ng-binding::text').get()
             images = flat.css('preact.ng-scope.ng-isolate-scope img::attr(src)').extract()
             yield {
+                'id': self.n_of_items,
                 'title': '{}, {}'.format(name, location),
                 'price': price,
-                'image': images,
+                'image': images[0],
             }
             self.n_of_items += 1
         # Finding the next page
