@@ -1,0 +1,5 @@
+scrapy
+scrapy-playwright
+sqlalchemy
+pandas
+
